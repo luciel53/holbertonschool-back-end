@@ -25,21 +25,20 @@ if __name__ == '__main__':
     arg = sys.argv[1]
 
     # The script must accept an integer as a parameter which is the employee ID
+    # if type(arg) == int:
+    for i in api_user:
+        if i.get('userId') == int(arg):
+            EMPLOYEE_NAME = i.get('name')
 
-    if type(arg) == int:
-        for i in api_user:
-            if i.id == arg:
-                EMPLOYEE_NAME = i.name
+    for j in api_todos:
+        # to add total number of tasks
+        if j.get('id') == int(arg):
+            TOTAL_NUMBER_OF_TASKS += 1
 
-        for j in api_todos:
-            # to add total number of tasks
-            if j.id == arg:
-                TOTAL_NUMBER_OF_TASKS += 1
-
-            if j.completed is True:
+            if j.get('completed') is True:
                 # to add number of done tasks
                 j.completed += 1
-                NUMBER_OF_DONE_TASKS = j.title
+                NUMBER_OF_DONE_TASKS.append(j.get('title'))
 
     print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
                                                           NUMBER_OF_DONE_TASKS,
@@ -47,4 +46,4 @@ if __name__ == '__main__':
                                                           ))
 
     for i in NUMBER_OF_DONE_TASKS:
-        print("\t ".format(NUMBER_OF_DONE_TASKS))
+        print("\t {}".format(i))
