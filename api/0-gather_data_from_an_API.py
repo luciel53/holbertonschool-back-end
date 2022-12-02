@@ -4,32 +4,30 @@ a Python script that, using this REST API, for a given employee ID, returns
  information about his/her TODO list progress.
 """
 from requests import get
-import sys
+from sys import argv as arg
 
 
 if __name__ == '__main__':
 
-    arg = sys.argv[1]
-
-    #create api_todos dictionary
+    # create api_todos dictionary
     api_todos_dict = {'userId': arg}
 
     # and add it to the url
-    todos_url = get('https://jsonplaceholder.typicode.com/todos', params=api_todos_dict)
-    response = todos_url.json()
-    user = response.json()
+    todos_url = get('https://jsonplaceholder.typicode.com/todos',
+                    params=api_todos_dict)
+    todos = todos_url.json()
 
     # create api_user dictionary
     api_user_dict = {'id': arg}
 
     # add it to url
-    user_url = get('https://jsonplaceholder.typicode.com/users', params=api_user_dict)
-    response = user_url.json()
-    todos = response.json()
+    user_url = get('https://jsonplaceholder.typicode.com/users',
+                   params=api_user_dict)
+    user = user_url.json()
 
     # define variables
-    EMPLOYEE_NAME = 0
-    NUMBER_OF_DONE_TASKS = 0
+    EMPLOYEE_NAME = None
+    NUMBER_OF_DONE_TASKS = []
     TOTAL_NUMBER_OF_TASKS = 0
 
     # find the value of employee_name
@@ -41,8 +39,8 @@ if __name__ == '__main__':
         # to add total number of tasks
         if j.get('completed') is True:
             # to add number of done tasks
-                j.completed += 1
-                NUMBER_OF_DONE_TASKS.append(j.get('title'))
+            j.completed += 1
+            NUMBER_OF_DONE_TASKS.append(j.get('title'))
         TOTAL_NUMBER_OF_TASKS += 1
 
     print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
