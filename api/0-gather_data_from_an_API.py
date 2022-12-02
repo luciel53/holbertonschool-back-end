@@ -25,26 +25,25 @@ if __name__ == '__main__':
                    params=api_user_dict)
     user = user_url.json()
 
-    # define variables
+    # define the variables
     EMPLOYEE_NAME = None
-    NUMBER_OF_DONE_TASKS = []
     TOTAL_NUMBER_OF_TASKS = 0
     completed = 0
     NUMBER_OF_DONE_TASKS_title = []
 
-    # find the value of employee_name
+    # find the value of the employee_name
     EMPLOYEE_NAME = user[0].get('name')
 
     # The script must accept an integer as a parameter which is the employee ID
-
     for j in todos:
-        # to add total number of tasks
         if j.get('userId') == int(arg[1]):
+            # to add total number of tasks
             TOTAL_NUMBER_OF_TASKS += 1
             if j.get('completed') is True:
+                # to add number of done tasks
                 completed += 1
                 NUMBER_OF_DONE_TASKS_title.append(j.get('title'))
-                # to add number of done tasks
+
 
     print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
                                                           completed,
