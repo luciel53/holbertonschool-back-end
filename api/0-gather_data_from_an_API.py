@@ -29,7 +29,8 @@ if __name__ == '__main__':
     EMPLOYEE_NAME = None
     NUMBER_OF_DONE_TASKS = []
     TOTAL_NUMBER_OF_TASKS = 0
-    complete = 0
+    completed = 0
+    NUMBER_OF_DONE_TASKS_title = []
 
     # find the value of employee_name
     EMPLOYEE_NAME = user[0].get('name')
@@ -40,15 +41,15 @@ if __name__ == '__main__':
         # to add total number of tasks
         if j.get('userId') == int(arg[1]):
             TOTAL_NUMBER_OF_TASKS += 1
-        if j.get('completed') is True:
-            complete += 1
-            NUMBER_OF_DONE_TASKS.append(j.get('title'))
-            # to add number of done tasks
+            if j.get('completed') is True:
+                completed += 1
+                NUMBER_OF_DONE_TASKS_title.append(j.get('title'))
+                # to add number of done tasks
 
     print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
-                                                          NUMBER_OF_DONE_TASKS,
+                                                          completed,
                                                           TOTAL_NUMBER_OF_TASKS
                                                           ))
 
-    for i in NUMBER_OF_DONE_TASKS:
+    for i in NUMBER_OF_DONE_TASKS_title:
         print("{} {}".format('\t', i))
