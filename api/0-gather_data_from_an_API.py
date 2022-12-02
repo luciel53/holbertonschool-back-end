@@ -9,7 +9,6 @@ import sys
 
 if __name__ == '__main__':
 
-
     api_todos = get('https://jsonplaceholder.typicode.com/todos')
     response = api_todos.json()
     response.json()
@@ -18,14 +17,14 @@ if __name__ == '__main__':
     response = api_user.json()
     response.json()
 
-    #define variables
+    # define variables
     EMPLOYEE_NAME = 0
     NUMBER_OF_DONE_TASKS = 0
     TOTAL_NUMBER_OF_TASKS = 0
 
     arg = sys.argv[1]
 
-    # The script must accept an integer as a parameter, which is the employee ID
+    # The script must accept an integer as a parameter which is the employee ID
 
     if type(arg) == int:
         for i in api_user:
@@ -37,11 +36,15 @@ if __name__ == '__main__':
             if j.id == arg:
                 TOTAL_NUMBER_OF_TASKS += 1
 
-            if j.completed == True:
+            if j.completed is True:
                 # to add number of done tasks
                 j.completed += 1
                 NUMBER_OF_DONE_TASKS = j.title
 
-    print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME, NUMBER_OF_DONE_TASKS, TOTAL_NUMBER_OF_TASKS))
+    print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
+                                                          NUMBER_OF_DONE_TASKS,
+                                                          TOTAL_NUMBER_OF_TASKS
+                                                          ))
 
-
+    for i in NUMBER_OF_DONE_TASKS:
+        print("\t ".format(NUMBER_OF_DONE_TASKS))
