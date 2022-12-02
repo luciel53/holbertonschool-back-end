@@ -46,4 +46,4 @@ if __name__ == '__main__':
                                                           ))
 
     for i in NUMBER_OF_DONE_TASKS:
-        print("\t {}".format(i))
+        print("{} {}".format('\t', i))
