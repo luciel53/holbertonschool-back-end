@@ -9,36 +9,41 @@ import sys
 
 if __name__ == '__main__':
 
-    api_todos = get('https://jsonplaceholder.typicode.com/todos')
-    response = api_todos.json()
-    response.json()
+    arg = sys.argv[1]
 
-    api_user = get('https://jsonplaceholder.typicode.com/users')
-    response = api_user.json()
-    response.json()
+    #create api_todos dictionary
+    api_todos_dict = {'userId': arg}
+
+    # and add it to the url
+    todos_url = get('https://jsonplaceholder.typicode.com/todos', params=api_todos_dict)
+    response = todos_url.json()
+    user = response.json()
+
+    # create api_user dictionary
+    api_user_dict = {'id': arg}
+
+    # add it to url
+    user_url = get('https://jsonplaceholder.typicode.com/users', params=api_user_dict)
+    response = user_url.json()
+    todos = response.json()
 
     # define variables
     EMPLOYEE_NAME = 0
     NUMBER_OF_DONE_TASKS = 0
     TOTAL_NUMBER_OF_TASKS = 0
 
-    arg = sys.argv[1]
+    # find the value of employee_name
+    EMPLOYEE_NAME = user[0].get('name')
 
     # The script must accept an integer as a parameter which is the employee ID
-    # if type(arg) == int:
-    for i in api_user:
-        if i.get('userId') == int(arg):
-            EMPLOYEE_NAME = i.get('name')
 
-    for j in api_todos:
+    for j in todos:
         # to add total number of tasks
-        if j.get('id') == int(arg):
-            TOTAL_NUMBER_OF_TASKS += 1
-
-            if j.get('completed') is True:
-                # to add number of done tasks
+        if j.get('completed') is True:
+            # to add number of done tasks
                 j.completed += 1
                 NUMBER_OF_DONE_TASKS.append(j.get('title'))
+        TOTAL_NUMBER_OF_TASKS += 1
 
     print("Employee {} is done with tasks({}/{}):".format(EMPLOYEE_NAME,
                                                           NUMBER_OF_DONE_TASKS,
