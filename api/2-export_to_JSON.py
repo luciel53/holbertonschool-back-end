@@ -32,10 +32,8 @@ if __name__ == '__main__':
     username = user[0].get('username')
 
     # to create a list of dictionaries
-    for task in todos:
-        task = [{"task": task.get('title'), "completed": task.get('completed'),
-                 "username": username}]
-        print(task)
+    task = [{"task": task.get('title'), "completed": task.get('completed'),
+             "username": username} for task in todos]
 
     # create an other dictionary, using userId and store the task value in it
     my_dict = {}
