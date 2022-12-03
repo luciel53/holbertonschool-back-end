@@ -28,12 +28,6 @@ if __name__ == '__main__':
                    params=api_user_dict)
     user = user_url.json()
 
-    # define the variables
-    EMPLOYEE_NAME = None
-    TOTAL_NUMBER_OF_TASKS = 0
-    completed = 0
-    NUMBER_OF_DONE_TASKS_title = []
-
     # find the value of the employee_name
     username = user[0].get('username')
 
