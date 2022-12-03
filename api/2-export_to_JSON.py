@@ -35,6 +35,7 @@ if __name__ == '__main__':
     for task in todos:
         task = [{"task": task.get('title'), "completed": task.get('completed'),
                  "username": username}]
+        print(task)
 
     # create an other dictionary, using userId and store the task value in it
     my_dict = {}
